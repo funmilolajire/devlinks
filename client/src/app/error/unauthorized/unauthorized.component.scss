@@ -1,0 +1,14 @@
+.unauthorized {
+  .info {
+    margin-top: 2.4rem;
+    margin-bottom: 4rem;
+  }
+
+  .buttons {
+    display: flex;
+    gap: 2.4rem;
+    > * {
+      flex-grow: 1;
+    }
+  }
+}

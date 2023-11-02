@@ -1,0 +1,16 @@
+<section class="server-error">
+  <app-heading heading="Internal Server Error" />
+  <p class="info">
+    The server encountered an internal error or misconfiguration and is
+    currently unable to complete your request. Give it a min and try again or
+    contact our support if the problem persists.
+  </p>
+  <div class="buttons">
+    <app-button label="Retry" (clickHandler)="reloadPage()" />
+    <app-button
+      label="Contact Support"
+      (clickHandler)="contactSupport()"
+      variant="secondary"
+    />
+  </div>
+</section>

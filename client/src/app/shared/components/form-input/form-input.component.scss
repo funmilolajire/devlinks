@@ -1,0 +1,51 @@
+@use "config" as *;
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: $grey-dark;
+  .label,
+  .error-text {
+    @extend %body-s;
+  }
+  .input-box {
+    height: 4.8rem;
+    border-radius: 8px;
+    background: $white;
+    border: 1px solid $grey-borders;
+    display: flex;
+    align-items: center;
+    position: relative;
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      height: fit-content;
+      position: absolute;
+      left: 1.6rem;
+    }
+
+    .error-text {
+      position: absolute;
+      right: 1.6rem;
+    }
+    &:focus-within {
+      border-color: $purple;
+      box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+    }
+  }
+  &.error {
+    .label,
+    .error-text {
+      color: $red;
+    }
+    .input-box {
+      border-color: $red;
+      &:focus-within {
+        box-shadow: 0px 0px 32px 0px rgba(255, 57, 57, 0.25);
+      }
+    }
+  }
+}

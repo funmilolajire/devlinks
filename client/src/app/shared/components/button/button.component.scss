@@ -1,0 +1,41 @@
+@use "config" as *;
+
+.button {
+  width: 100%;
+  height: 4.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  @extend %heading-s;
+  transition: all 0.3s linear;
+
+  &:hover {
+    transition: all 0.3s linear;
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.primary {
+    border: 0;
+    background: $purple;
+    color: $white;
+    &:hover:not(:disabled) {
+      background: $purple-hover;
+      box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+    }
+    &:disabled {
+      opacity: 0.25;
+    }
+  }
+  &.secondary {
+    border: 1px solid $purple;
+    background: unset;
+    color: $purple;
+    &:hover:not(:disabled) {
+      background: $purple-light;
+    }
+    &:disabled {
+      opacity: 0.25;
+    }
+  }
+}

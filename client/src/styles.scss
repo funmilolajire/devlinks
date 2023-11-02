@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@use "config" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $primary-font;
+}
+
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: $grey;
+  @extend %body-m;
+}
