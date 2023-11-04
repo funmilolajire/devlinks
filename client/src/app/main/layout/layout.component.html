@@ -1,3 +1,40 @@
-<main class="layout">
+<main class="layout" [class.preview]="previewMode">
+  <header class="header" [class.preview]="previewMode">
+    <ng-container *ngIf="!previewMode; else preview">
+      <app-logo class="logo" variant="small" />
+      <nav class="nav">
+        <a class="link" routerLink="/links" routerLinkActive="active"
+          ><app-link-bold class="icon" /> Links</a
+        >
+        <a class="link" routerLink="/profile" routerLinkActive="active"
+          ><app-user-circle class="icon" /> Profile Details</a
+        >
+      </nav>
+      <app-button
+        class="preview-button"
+        label="Preview"
+        variant="secondary"
+        routerLink="/preview"
+      />
+    </ng-container>
+    <ng-template #preview>
+      <app-button
+        class="back"
+        label="Back to Editor"
+        variant="secondary"
+        routerLink="/links"
+      />
+      <app-button
+        class="share"
+        label="Share Link"
+        [cdkCopyToClipboard]="link"
+        (clickHandler)="shareLink()"
+      />
+    </ng-template>
+  </header>
+  <div class="notify-share" *ngIf="showPopup">
+    <app-link-bold class="icon" />
+    <p class="text">The link has been copied to your clipboard!</p>
+  </div>
   <router-outlet></router-outlet>
 </main>

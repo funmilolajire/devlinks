@@ -11,3 +11,12 @@
     }
   }
 }
+
+@media all and (max-width: 400px) {
+  .server-error {
+    .buttons {
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<section class="user-details" [ngClass]="variant">
+  <app-avatar
+    class="avatar"
+    [imageUrl]="user?.imageUrl || ''"
+    [variant]="variant"
+  />
+  <h1 [class.absent]="!name">{{ name }}</h1>
+  <a [href]="mailto" [class.absent]="!user?.email">{{ user?.email }}</a>
+</section>

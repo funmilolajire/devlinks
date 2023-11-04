@@ -3,9 +3,14 @@
   gap: 7.5px;
   align-items: center;
   height: 4rem;
+  width: fit-content;
 
   * {
     display: flex;
     align-items: center;
+  }
+
+  &.small {
+    gap: 6px;
   }
 }

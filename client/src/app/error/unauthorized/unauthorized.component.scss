@@ -12,3 +12,12 @@
     }
   }
 }
+
+@media all and (max-width: 400px) {
+  .unauthorized {
+    .buttons {
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+}
