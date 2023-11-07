@@ -1,11 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-form-input',
   templateUrl: './form-input.component.html',
   styleUrls: ['./form-input.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class TextInputComponent {
-  @Input({ required: true }) label = '';
+  @Input() label = '';
+  @Input() for = '';
   @Input() error = '';
 }

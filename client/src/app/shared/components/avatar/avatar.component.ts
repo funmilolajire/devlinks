@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class AvatarComponent {
   @Input() variant: 'mockup' | 'preview' = 'preview';
+  @Input() initials = '';
   @Input() imageUrl = '';
 }

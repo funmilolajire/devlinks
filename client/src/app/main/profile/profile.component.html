@@ -1,4 +1,72 @@
 <div class="profile">
-  <app-mockup class="mockup" />
-  <section class="form"></section>
+  <app-mockup class="mockup" [user]="user" [inProfile]="true" />
+  <form [formGroup]="profileForm" (ngSubmit)="save()" class="form">
+    <section class="top">
+      <app-heading heading="Profile Details" />
+      <p class="info">
+        Add your details to create a personal touch to your profile.
+      </p>
+      <div class="file-container">
+        <label for="profile">Profile picture</label>
+        <div class="upload-file-box">
+          <input id="profile" type="file" class="file-input" accept="image/png, image/jpeg"
+            (change)="onChange($event)" #fileUpload />
+          <button class="upload-file" type="button" (click)="fileUpload.click()"
+            [class.with-image]="!!imageUrl.value">
+            <img [src]="imageUrl.value" alt="profile" *ngIf="imageUrl.value" />
+            <app-image-upload class="icon" />
+            <span class="text">{{ !imageUrl.value ? "+ Upload" : "Change" }} Image</span>
+          </button>
+          <span class="instructions">Image must be below 1024x1024px. Use PNG or JPG format.</span>
+        </div>
+      </div>
+      <div class="form-inputs">
+        <div class="input-container">
+          <label for="firstName">First name*</label>
+          <app-form-input class="form-input" [error]="
+              firstName.touched &&
+              firstName.errors &&
+              firstName.errors['required']
+                ? 'Can\'t be empty'
+                : firstName.touched && firstName.errors
+                ? 'Error'
+                : ''
+            ">
+            <input class="input" type="text" id="firstName" formControlName="firstName"
+              placeholder="e.g. John" />
+          </app-form-input>
+        </div>
+        <div class="input-container">
+          <label for="lastName">Last name*</label>
+          <app-form-input class="form-input" [error]="
+              lastName.touched && lastName.errors && lastName.errors['required']
+                ? 'Can\'t be empty'
+                : lastName.touched && lastName.errors
+                ? 'Error'
+                : ''
+            ">
+            <input class="input" type="text" id="lastName" formControlName="lastName"
+              placeholder="e.g. Appleseed" />
+          </app-form-input>
+        </div>
+        <div class="input-container">
+          <label for="email">Email</label>
+          <app-form-input class="form-input" [error]="
+              email.touched && email.errors && email.errors['email']
+                ? 'Invalid email'
+                : email.touched && email.errors
+                ? 'Error'
+                : ''
+            ">
+            <input class="input" type="text" id="email" formControlName="email"
+              placeholder="e.g. email@example.com" />
+          </app-form-input>
+        </div>
+      </div>
+    </section>
+    <div class="bottom">
+      <app-button class="save-button" label="Save" type="submit"
+        [disabled]="!profileForm.valid&&!profileForm.dirty" />
+    </div>
+  </form>
 </div>

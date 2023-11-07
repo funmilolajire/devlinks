@@ -17,3 +17,40 @@ body {
   color: $grey;
   @extend %body-m;
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+  background: $purple-light;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 1px solid $purple-hover;
+  background: $purple;
+}
+
+.rounded-12 {
+  border-radius: 12px;
+}
+
+.global-link-item-drag-button {
+  margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  cursor: grab;
+  background: none;
+  border: 0;
+
+  &.cdk-drag-placeholder {
+    .drag-button {
+      cursor: grabbing;
+    }
+  }
+
+  span {
+    width: 12px;
+    height: 1px;
+    background: $grey;
+  }
+}

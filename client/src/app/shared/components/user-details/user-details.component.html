@@ -2,6 +2,7 @@
   <app-avatar
     class="avatar"
     [imageUrl]="user?.imageUrl || ''"
+    [initials]="initials"
     [variant]="variant"
   />
   <h1 [class.absent]="!name">{{ name }}</h1>

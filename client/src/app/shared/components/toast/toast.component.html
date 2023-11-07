@@ -1,0 +1,5 @@
+<div class="toast" [class.error]="icon === 'error'" *ngIf="showToast">
+  <app-link-bold class="icon" *ngIf="icon === 'link'" />
+  <app-disk class="icon" *ngIf="icon === 'save'" />
+  <p class="text">{{ text }}</p>
+</div>

@@ -1,0 +1,170 @@
+@use "config" as *;
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: $grey-dark;
+
+  .label,
+  .error-text {
+    @extend %body-s;
+  }
+
+  .input-box {
+    height: 4.8rem;
+    border-radius: 8px;
+    background: $white;
+    border: 1px solid $grey-borders;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    >.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      height: fit-content;
+      position: absolute;
+      left: 1.6rem;
+
+      &.arrow {
+        right: 1.6rem;
+        margin-left: auto;
+        color: $purple;
+        transition: transform 0.3s linear;
+      }
+
+      +.input {
+        padding-left: 4.4rem;
+      }
+    }
+
+    .input {
+      padding: 0 1.6rem;
+      color: $grey-dark;
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      border: 0;
+      outline: 0;
+      caret-color: $purple;
+      @extend %body-m;
+
+      &::placeholder {
+        color: inherit;
+        opacity: 0.5;
+      }
+    }
+
+    .error-text {
+      position: absolute;
+      right: 0;
+      bottom: calc(100% + 4px);
+    }
+
+    &:focus-within {
+      border-color: $purple;
+      box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+
+      >.icon {
+        &.arrow {
+          transition: transform 0.3s linear;
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .dropdown {
+      position: absolute;
+      width: 100%;
+      top: calc(100% + 8px);
+      z-index: 1;
+      left: 0;
+      right: 0;
+      padding: 0 1.6rem;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid $grey-borders;
+      border-radius: 8px;
+      background: $white;
+      box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.1);
+      max-height: 30rem;
+      overflow-y: auto;
+
+      .item {
+        padding: 1.2rem 0;
+        display: flex;
+        gap: 1.2rem;
+        width: 100%;
+        color: $grey;
+        list-style: none;
+        cursor: pointer;
+
+        &:hover {
+          color: $purple-hover;
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $grey-borders;
+        }
+
+        &.active {
+          color: $purple;
+
+          .text {
+            color: $purple;
+          }
+        }
+
+        .text {
+          color: $grey-dark;
+        }
+      }
+    }
+
+    .dropdown::-webkit-scrollbar {
+      width: 10px;
+      background: transparent;
+    }
+
+    .dropdown::-webkit-scrollbar-thumb {
+      background: $purple-hover;
+      border: 3px solid $white;
+      border-radius: 30px;
+    }
+  }
+
+  &.error {
+
+    .label,
+    .error-text {
+      color: $red;
+    }
+
+    .input-box {
+      border-color: $red;
+
+      >.icon {
+        &.arrow {
+          color: $red;
+        }
+      }
+
+      &:focus-within {
+        box-shadow: 0px 0px 32px 0px rgba(255, 57, 57, 0.25);
+      }
+    }
+  }
+}
+
+@media all and (max-width: 550px) {
+  .form-input {
+    .input-box {
+      .input {
+        // background: $grey-light;
+      }
+    }
+  }
+}

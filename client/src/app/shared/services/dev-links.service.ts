@@ -72,6 +72,13 @@ export class DevLinksService {
   constructor() {}
 
   getDisplayName(id: string) {
-    return allDevLinks.find((devlink) => devlink.id === id)?.displayName;
+    return (
+      this.devLinks.find((devlink) => devlink.id === id)?.displayName || ''
+    );
+  }
+  getPlatformId(platform: string) {
+    return (
+      this.devLinks.find((link) => link.displayName === platform)?.id || ''
+    );
   }
 }

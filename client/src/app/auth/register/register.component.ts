@@ -7,6 +7,8 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +30,7 @@ export class RegisterComponent {
     password: this.password,
     confirm_password: this.confirm_password,
   });
-
+  constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {
     this.registerForm.addValidators(
       this.comparePasswordValidator(this.confirm_password, this.password)
@@ -54,5 +56,8 @@ export class RegisterComponent {
 
   onSubmit() {
     console.log(this.registerForm.value);
+    const { email, password } = this.registerForm.value;
+    this.authService.register(email, password);
+    this.router.navigateByUrl('/profile');
   }
 }

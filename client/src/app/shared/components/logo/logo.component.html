@@ -1,6 +1,6 @@
 <div class="logo" [ngClass]="variant">
-  <app-link-circle *ngIf="variant === 'large'" />
-  <app-link-circle-small *ngIf="variant === 'small'" />
-  <app-devlinks *ngIf="variant === 'large'" />
-  <app-devlinks-small *ngIf="variant === 'small'" />
+  <app-link-circle class="link-icon-large" *ngIf="variant === 'large'" />
+  <app-link-circle-small class="link-icon-small" *ngIf="variant === 'small'" />
+  <app-devlinks class="devlinks-large" *ngIf="variant === 'large'" />
+  <app-devlinks-small class="devlinks-small" *ngIf="variant === 'small'" />
 </div>

@@ -19,22 +19,6 @@
       align-items: center;
       justify-content: center;
     }
-    .input {
-      padding-left: 4.4rem;
-      padding-right: 1.6rem;
-      color: $grey-dark;
-      width: 100%;
-      height: 100%;
-      border-radius: 8px;
-      border: 0;
-      outline: 0;
-      caret-color: $purple;
-      @extend %body-m;
-      &::placeholder {
-        color: inherit;
-        opacity: 0.5;
-      }
-    }
 
     .password-info {
       @extend %body-s;
@@ -55,9 +39,6 @@
 
 @media all and (max-width: 550px) {
   .register {
-    .input {
-      background: $grey-light;
-    }
     .navigate {
       text-align: center;
       display: flex;

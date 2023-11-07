@@ -9,5 +9,5 @@ export interface UserDetails {
 
 export interface UserLink {
   platform: string;
-  link: string;
+  url: string;
 }

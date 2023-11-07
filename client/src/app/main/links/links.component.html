@@ -1,1 +1,39 @@
-<p>links works!</p>
+<div class="links">
+  <app-mockup class="mockup" [user]="user" />
+  <form [formGroup]="linksForm" (ngSubmit)="save()" class="form">
+    <section class="top">
+      <app-heading heading="Customize your links" />
+      <p class="info">
+        Add/edit/remove links below and then share all your profiles with the
+        world!
+      </p>
+      <app-button class="add-new-button" variant="secondary" label="+ Add new link"
+        (clickHandler)="addLink()" />
+      <div class="no-lists" *ngIf="!linksArray.value.length">
+        <picture class="illustration">
+          <img src="/assets/images/no-lists-illustration.png" alt="" />
+        </picture>
+        <app-heading class="no-lists-heading" heading="Let’s get you started" />
+        <p class="no-lists-info">
+          Use the “Add new link” button to get started. Once you have more than
+          one link, you can reorder and edit them. We’re here to help you share
+          your profiles with everyone!
+        </p>
+      </div>
+      <div class="form-array" *ngIf="linksArray.value.length" cdkDropList
+        (cdkDropListDropped)="drop($event)">
+        <app-link-item *ngFor="let linkGroup of linksArray.controls; let i = index"
+          [linkGroup]="linkGroup" [index]="i" (changePlatform)="changePlatform(i,$event)"
+          (removeLink)="removeLink(i)" cdkDrag class="link rounded-12">
+          <button class="global-link-item-drag-button" type="button" cdkDragHandle>
+            <span></span><span></span>
+          </button>
+        </app-link-item>
+      </div>
+    </section>
+    <div class="bottom">
+      <app-button class="save-button" label="Save" type="submit"
+        [disabled]="(!linksForm.valid || !linksArray.value.length)&&!linksForm.dirty" />
+    </div>
+  </form>
+</div>

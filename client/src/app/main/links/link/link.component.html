@@ -1,0 +1,49 @@
+<div class="link" [formGroup]="linkGroup">
+  <div class="header">
+    <ng-content />
+    <h3 class="title">Link #{{ index + 1 }}</h3>
+    <button class="remove-button" type="button" (click)="removeLinkHandler()">
+      Remove
+    </button>
+  </div>
+  <app-form-select label="Platform" [for]="'platform' + index" [error]="
+                linkGroup.get('platform')?.touched &&
+                linkGroup.get('platform')?.errors &&
+                (linkGroup.get('platform')?.errors)!['required']
+                  ? 'Can\'t be empty'
+                  : linkGroup.get('platform')?.touched &&
+                    linkGroup.get('platform')?.errors &&
+                    (linkGroup.get('platform')?.errors)!['platformExists']
+                  ? 'Platform exists'
+                  : linkGroup.get('platform')?.touched &&
+                    linkGroup.get('platform')?.errors &&
+                    (linkGroup.get('platform')?.errors)!['platformNotInList']
+                  ? 'Invalid platform'
+                  : linkGroup.get('platform')?.touched &&
+                    linkGroup.get('platform')?.errors
+                  ? 'Error'
+                  : ''
+              " [selectedPlatform]="linkGroup.get('platform')?.value || ''"
+    (changePlatform)="changePlatformHandler($event)">
+    <input class="input" type="text" [id]="'platform' + index" placeholder="Search platform here"
+      formControlName="platform" autocomplete="off" />
+  </app-form-select>
+  <app-form-input label="Link" [for]="'link' + index" [error]="
+                linkGroup.get('url')?.touched &&
+                linkGroup.get('url')?.errors &&
+                (linkGroup.get('url')?.errors)!['required']
+                  ? 'Can\'t be empty'
+                  : linkGroup.get('url')?.touched &&
+                    linkGroup.get('url')?.errors &&
+                    (linkGroup.get('url')?.errors)!['url']
+                  ? 'Please check the URL'
+                  : linkGroup.get('url')?.touched &&
+                    linkGroup.get('url')?.errors
+                  ? 'Error'
+                  : ''
+              ">
+    <app-link-bold variant="small" class="icon" />
+    <input class="input" type="text" [id]="'link' + index"
+      placeholder="e.g. https://www.github.com/johnappleseed" formControlName="url" />
+  </app-form-input>
+</div>

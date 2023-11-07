@@ -14,3 +14,11 @@
     gap: 6px;
   }
 }
+
+@media all and (max-width: 500px) {
+  .logo {
+    .devlinks-small {
+      display: none;
+    }
+  }
+}

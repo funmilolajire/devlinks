@@ -1,3 +1,4 @@
 <picture class="avatar" [ngClass]="variant" [class.present]="!!imageUrl">
   <img [src]="imageUrl" alt="user" *ngIf="!!imageUrl" />
+  <h2 class="initials" *ngIf="!imageUrl">{{ initials }}</h2>
 </picture>

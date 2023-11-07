@@ -2,9 +2,7 @@
   <app-heading heading="Create Account" />
   <p class="info">Let’s get you started sharing your links!</p>
   <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <app-form-input
-      label="Email address"
-      [error]="
+    <app-form-input label="Email address" [error]="
         email.touched && email.errors && email.errors['email']
           ? 'Invalid email'
           : email.touched && email.errors && email.errors['required']
@@ -12,20 +10,12 @@
           : email.touched && email.errors
           ? 'Error'
           : ''
-      "
-    >
+      ">
       <app-envelope class="icon" />
-      <input
-        class="input"
-        type="text"
-        id="Email address"
-        placeholder="e.g. alex@email.com"
-        formControlName="email"
-      />
+      <input class="input" type="text" id="Email address" placeholder="e.g. alex@email.com"
+        formControlName="email" />
     </app-form-input>
-    <app-form-input
-      label="Create password"
-      [error]="
+    <app-form-input label="Create password" [error]="
         password.touched && password.errors && password.errors['minlength']
           ? 'Please check again'
           : password.touched && password.errors && password.errors['required']
@@ -37,20 +27,12 @@
           : password.touched && password.errors
           ? 'Error'
           : ''
-      "
-    >
+      ">
       <app-lock-key class="icon" />
-      <input
-        class="input"
-        type="password"
-        id="Password"
-        placeholder="At least 8 characters"
-        formControlName="password"
-      />
+      <input class="input" type="password" id="Password" placeholder="At least 8 characters"
+        formControlName="password" />
     </app-form-input>
-    <app-form-input
-      label="Confirm password"
-      [error]="
+    <app-form-input label="Confirm password" [error]="
         confirm_password.touched &&
         confirm_password.errors &&
         confirm_password.errors['minlength']
@@ -66,29 +48,16 @@
           : confirm_password.touched && confirm_password.errors
           ? 'Error'
           : ''
-      "
-    >
+      ">
       <app-lock-key class="icon" />
-      <input
-        class="input"
-        type="password"
-        id="Confirm Password"
-        placeholder="At least 8 characters"
-        formControlName="confirm_password"
-      />
+      <input class="input" type="password" id="Confirm Password" placeholder="At least 8 characters"
+        formControlName="confirm_password" />
     </app-form-input>
 
-    <small class="password-info"
-      >Password must contain at least 8 characters</small
-    >
+    <small class="password-info">Password must contain at least 8 characters</small>
 
-    <app-button
-      [disabled]="!registerForm.valid"
-      class="button"
-      type="submit"
-      label="Create new account"
-      (clickHandler)="onSubmit()"
-    />
+    <app-button [disabled]="!registerForm.valid" class="button" type="submit"
+      label="Create new account" />
   </form>
 
   <p class="navigate">

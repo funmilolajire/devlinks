@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { PortalModule } from '@angular/cdk/portal';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CdkDrag, CdkDragHandle, CdkDropList } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,6 +55,14 @@ import { StackOverflowComponent } from './shared/icons/platforms/stack-overflow.
 import { TwitchComponent } from './shared/icons/platforms/twitch.component';
 import { TwitterComponent } from './shared/icons/platforms/twitter.component';
 import { YoutubeComponent } from './shared/icons/platforms/youtube.component';
+import { ImageUploadComponent } from './shared/icons/image-upload.component';
+import { ToastComponent } from './shared/components/toast/toast.component';
+import { DiskComponent } from './shared/icons/disk.component';
+import { EyeBoldComponent } from './shared/icons/eye-bold.component';
+import { FormSelectComponent } from './shared/components/form-select/form-select.component';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { PlatformIconsComponent } from './shared/components/platform-icons/platform-icons.component';
+import { LinkComponent } from './main/links/link/link.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +94,9 @@ import { YoutubeComponent } from './shared/icons/platforms/youtube.component';
     AvatarComponent,
     UserDetailsComponent,
     ArrowRightComponent,
+    ImageUploadComponent,
+    DiskComponent,
+    EyeBoldComponent,
     GithubComponent,
     CodepenComponent,
     CodewarsComponent,
@@ -97,13 +111,24 @@ import { YoutubeComponent } from './shared/icons/platforms/youtube.component';
     TwitchComponent,
     TwitterComponent,
     YoutubeComponent,
+    ToastComponent,
+    FormSelectComponent,
+    ClickOutsideDirective,
+    PlatformIconsComponent,
+    LinkComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     ClipboardModule,
+    PortalModule,
+    OverlayModule,
+    CdkDropList,
+    CdkDrag,
+    CdkDragHandle,
   ],
   providers: [],
   bootstrap: [AppComponent],

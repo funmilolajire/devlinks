@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, timer } from 'rxjs';
+import { ToastService } from 'src/app/shared/components/toast/toast.service';
 
 @Component({
   selector: 'app-layout',
@@ -10,10 +11,13 @@ import { filter, timer } from 'rxjs';
 })
 export class LayoutComponent implements OnInit {
   previewMode = true;
-  showPopup = false;
   // TODO link to be copied
   link = 'url link goes here';
-  constructor(private router: Router, private location: Location) {}
+  constructor(
+    private router: Router,
+    private location: Location,
+    public toastService: ToastService
+  ) {}
   ngOnInit() {
     this.previewMode = this.location.path() === '/preview';
     this.router.events
@@ -23,7 +27,9 @@ export class LayoutComponent implements OnInit {
       });
   }
   shareLink() {
-    this.showPopup = true;
-    timer(3000).subscribe(() => (this.showPopup = false));
+    this.toastService.toastHandler(
+      'The link has been copied to your clipboard!',
+      'link'
+    );
   }
 }

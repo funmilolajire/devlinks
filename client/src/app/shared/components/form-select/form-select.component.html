@@ -1,0 +1,25 @@
+<div class="form-input" [class.error]="!!error">
+  <label class="label" [for]="for || label" *ngIf="!!label">{{ label }}</label>
+  <div class="input-box" (click)="handleDropdown()" appClickOutside
+    (clickOutside)="closeDropdown()">
+    <app-platform-icons class="icon logo" [platform]="platformId" />
+    <ng-content select=".input" />
+    <span class="arrow icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9" fill="none">
+        <path d="M1 1L7 7L13 1" stroke="currentColor" stroke-width="2" />
+      </svg>
+    </span>
+    <span class="error-text" *ngIf="!!error">{{ error }}</span>
+    <ng-template [cdkPortalOutlet]="portalOutlet"></ng-template>
+    <ng-template #templatePortalContent>
+      <ul class="dropdown">
+        <li *ngFor="let platform of allPlatforms" class="item"
+          [class.active]="platformId === platform.id"
+          (click)="platformHandler(platform.displayName)">
+          <app-platform-icons [platform]="platform.id" />
+          {{ platform.displayName }}
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+</div>
