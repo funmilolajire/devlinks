@@ -2,7 +2,7 @@
   <label class="label" [for]="for || label" *ngIf="!!label">{{ label }}</label>
   <div class="input-box" (click)="handleDropdown()" appClickOutside
     (clickOutside)="closeDropdown()">
-    <app-platform-icons class="icon logo" [platform]="platformId" />
+    <app-platform-icons class="icon logo" [platform]="platformId" [inDropdown]="true" />
     <ng-content select=".input" />
     <span class="arrow icon">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9" fill="none">
@@ -16,7 +16,7 @@
         <li *ngFor="let platform of allPlatforms" class="item"
           [class.active]="platformId === platform.id"
           (click)="platformHandler(platform.displayName)">
-          <app-platform-icons [platform]="platform.id" />
+          <app-platform-icons class="logo" [platform]="platform.id" [inDropdown]="true" />
           {{ platform.displayName }}
         </li>
       </ul>

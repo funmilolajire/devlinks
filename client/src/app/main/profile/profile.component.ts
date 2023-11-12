@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
-import { UserDetails } from 'src/app/shared/types/user';
+import { UserService } from 'src/app/shared/services/user.service';
+import { UserDetails, UserLink } from 'src/app/shared/types/user';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   imageUrl = new FormControl('');
   firstName = new FormControl('', Validators.required);
   lastName = new FormControl('', Validators.required);
@@ -20,10 +21,28 @@ export class ProfileComponent {
     email: this.email,
   });
 
-  constructor(private toastService: ToastService) {}
+  constructor(
+    private toastService: ToastService,
+    private userService: UserService
+  ) {}
 
-  get user() {
-    return { ...this.profileForm.value, links: [], id: '1' } as UserDetails;
+  userId: string = '';
+  userLinks: UserLink[] = [];
+  get profile() {
+    return {
+      ...this.profileForm.value,
+      id: this.userId,
+      links: this.userLinks,
+    } as UserDetails;
+  }
+  ngOnInit(): void {
+    this.userService.user$.subscribe((val) => {
+      const { imageUrl, firstName, lastName, email, links, id } =
+        val as UserDetails;
+      this.profileForm.patchValue({ imageUrl, firstName, lastName, email });
+      this.userLinks = links;
+      this.userId = id;
+    });
   }
 
   onChange(event: Event) {
@@ -69,10 +88,19 @@ export class ProfileComponent {
     }
   }
   save() {
-    console.log(this.profileForm.value);
-    this.toastService.toastHandler(
-      'Your changes have been successfully saved!',
-      'save'
-    );
+    if (this.userId) {
+      this.userService.updateUser(this.userId, this.profileForm.value as any);
+      this.userService.user$.next({
+        ...(this.profileForm.value as any),
+        id: this.userId,
+        links: this.userLinks,
+      });
+      this.toastService.toastHandler(
+        'Your changes have been successfully saved!',
+        'save'
+      );
+    } else {
+      this.toastService.toastHandler('User is not logged in!', 'error');
+    }
   }
 }

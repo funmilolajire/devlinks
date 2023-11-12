@@ -13,7 +13,7 @@ export class DevLinkComponent {
 
   constructor(private devlinksService: DevLinksService) {}
 
-  get platform() {
-    return this.devlinksService.getDisplayName(this.link?.platform || '');
+  get platformId() {
+    return this.devlinksService.getPlatformId(this.link?.platform || '');
   }
 }

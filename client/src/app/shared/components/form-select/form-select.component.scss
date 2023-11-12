@@ -29,6 +29,10 @@
       position: absolute;
       left: 1.6rem;
 
+      &.logo {
+        color: $grey;
+      }
+
       &.arrow {
         right: 1.6rem;
         margin-left: auto;
@@ -98,9 +102,15 @@
         display: flex;
         gap: 1.2rem;
         width: 100%;
-        color: $grey;
+        color: $grey-dark;
         list-style: none;
         cursor: pointer;
+
+        .logo {
+          display: flex;
+          align-items: center;
+          color: $grey;
+        }
 
         &:hover {
           color: $purple-hover;

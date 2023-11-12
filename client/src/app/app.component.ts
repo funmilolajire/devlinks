@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AuthService } from './shared/services/auth.service';
+import { UserService } from './shared/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +15,18 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class AppComponent {}
+export class AppComponent implements OnInit, OnDestroy {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
+  ngOnInit(): void {
+    this.userService.user$.next(
+      this.authService.getLoggedInUser()?.user || null
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.userService.user$.unsubscribe();
+  }
+}

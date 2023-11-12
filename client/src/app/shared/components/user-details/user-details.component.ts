@@ -15,8 +15,8 @@ export class UserDetailsComponent {
     return `${this.user?.firstName || ''} ${this.user?.lastName || ''}`.trim();
   }
   get initials() {
-    return `${this.user?.firstName.trim().charAt(0) || ''}${
-      this.user?.lastName.trim().charAt(0) || ''
+    return `${this.user?.firstName?.trim().charAt(0) || ''}${
+      this.user?.lastName?.trim().charAt(0) || ''
     }`;
   }
   get mailto() {

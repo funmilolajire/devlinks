@@ -1,81 +1,22 @@
-<a
-  [href]="link?.url"
-  class="dev-link"
-  [class.small]="variant === 'small'"
-  [ngClass]="link?.platform"
->
+<a [href]="link?.url" class="dev-link" [class.small]="variant === 'small'" [ngClass]="platformId">
   <ng-container>
-    <app-codepen
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'codepen'"
-    />
-    <app-codewars
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'codewars'"
-    />
-    <app-dev-to
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'dev_to'"
-    />
-    <app-facebook
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'facebook'"
-    />
-    <app-freecodecamp
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'freecodecamp'"
-    />
-    <app-frontend-mentor
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'frontend_mentor'"
-    />
-    <app-github
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'github'"
-    />
-    <app-gitlab
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'gitlab'"
-    />
-    <app-hashnode
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'hashnode'"
-    />
-    <app-linkedin
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'linkedin'"
-    />
-    <app-stack-overflow
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'stack_overflow'"
-    />
-    <app-twitch
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'twitch'"
-    />
-    <app-twitter
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'twitter'"
-    />
-    <app-youtube
-      [variant]="variant"
-      class="logo icon"
-      *ngIf="link?.platform === 'youtube'"
-    />
+    <app-codepen [variant]="variant" class="logo icon" *ngIf="platformId === 'codepen'" />
+    <app-codewars [variant]="variant" class="logo icon" *ngIf="platformId === 'codewars'" />
+    <app-dev-to [variant]="variant" class="logo icon" *ngIf="platformId === 'dev_to'" />
+    <app-facebook [variant]="variant" class="logo icon" *ngIf="platformId === 'facebook'" />
+    <app-freecodecamp [variant]="variant" class="logo icon" *ngIf="platformId === 'freecodecamp'" />
+    <app-frontend-mentor [variant]="variant" class="logo icon"
+      *ngIf="platformId === 'frontend_mentor'" />
+    <app-github [variant]="variant" class="logo icon" *ngIf="platformId === 'github'" />
+    <app-gitlab [variant]="variant" class="logo icon" *ngIf="platformId === 'gitlab'" />
+    <app-hashnode [variant]="variant" class="logo icon" *ngIf="platformId === 'hashnode'" />
+    <app-linkedin [variant]="variant" class="logo icon" *ngIf="platformId === 'linkedin'" />
+    <app-stack-overflow [variant]="variant" class="logo icon"
+      *ngIf="platformId === 'stack_overflow'" />
+    <app-twitch [variant]="variant" class="logo icon" *ngIf="platformId === 'twitch'" />
+    <app-twitter [variant]="variant" class="logo icon" *ngIf="platformId === 'twitter'" />
+    <app-youtube [variant]="variant" class="logo icon" *ngIf="platformId === 'youtube'" />
   </ng-container>
-  <p class="platform">{{ platform }}</p>
+  <p class="platform">{{ link?.platform }}</p>
   <app-arrow-right class="arrow icon" />
 </a>

@@ -8,4 +8,5 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 })
 export class PlatformIconsComponent {
   @Input({ required: true }) platform?: string;
+  @Input() inDropdown?: boolean;
 }

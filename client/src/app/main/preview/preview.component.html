@@ -1,6 +1,6 @@
 <div class="preview">
   <app-user-details [user]="user" />
   <ul class="links">
-    <li *ngFor="let link of user.links"><app-dev-link [link]="link" /></li>
+    <li *ngFor="let link of user?.links"><app-dev-link [link]="link" /></li>
   </ul>
 </div>

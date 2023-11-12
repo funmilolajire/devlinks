@@ -11,6 +11,8 @@ import {
 import { ToastService } from 'src/app/shared/components/toast/toast.service';
 import { DevLinksService } from 'src/app/shared/services/dev-links.service';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { UserService } from 'src/app/shared/services/user.service';
+import { UserDetails } from 'src/app/shared/types/user';
 
 type LinkType = FormGroup<{
   platform: FormControl<string | null>;
@@ -23,26 +25,53 @@ type LinkType = FormGroup<{
 })
 export class LinksComponent implements OnInit {
   linksForm = new FormGroup({ links: new FormArray<LinkType>([]) });
+  userDetails?: Omit<UserDetails, 'links'>;
 
   constructor(
     private toastService: ToastService,
-    private devLinksService: DevLinksService
+    private devLinksService: DevLinksService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    this.addLink();
-  }
-
-  get user() {
-    return null;
-  }
-
-  get allLinks() {
-    return this.devLinksService.devLinks;
+    this.userService.user$.subscribe((user) => {
+      const { links, ...rest } = user as UserDetails;
+      if (links.length > 0) {
+        this.linksArray.clear();
+        links.forEach((link) => {
+          this.linksArray.push(this.newGroup(link.platform, link.url));
+        });
+      }
+      this.userDetails = rest;
+    });
   }
 
   get linksArray() {
     return this.linksForm.get('links') as FormArray<LinkType>;
+  }
+
+  get user() {
+    const user = {
+      ...this.userDetails,
+      ...this.linksForm.value,
+    } as UserDetails;
+    return user;
+  }
+
+  newGroup(platformInit: string = '', urlInit: string = '') {
+    const platform = new FormControl(platformInit, [
+      Validators.required,
+      this.checkPlatformExists(),
+      this.checkPlatformIsInList(),
+    ]);
+    const url = new FormControl(urlInit, [
+      Validators.required,
+      this.checkUrl(),
+    ]);
+    return new FormGroup({
+      platform,
+      url,
+    });
   }
 
   getUnselectedPlatforms() {
@@ -68,6 +97,12 @@ export class LinksComponent implements OnInit {
       const urlPatternMatch = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(
         control.value
       );
+      // &&
+      // control.value.startsWith(
+      //   this.devLinksService.devLinks.find(
+      //     (link) => control.value === link.displayName
+      //   )?.urlPattern
+      // );
       if (!urlPatternMatch) {
         return { url: true };
       }
@@ -106,17 +141,7 @@ export class LinksComponent implements OnInit {
       return;
     }
     const unselectedPlatforms = this.getUnselectedPlatforms();
-    const platform = new FormControl(unselectedPlatforms[0], [
-      Validators.required,
-      this.checkPlatformExists(),
-      this.checkPlatformIsInList(),
-    ]);
-    const url = new FormControl('', [Validators.required, this.checkUrl()]);
-    const newLinkGroup = new FormGroup({
-      platform,
-      url,
-    });
-    this.linksArray.push(newLinkGroup);
+    this.linksArray.push(this.newGroup(unselectedPlatforms[0]));
   }
   removeLink(linkIndex: number) {
     this.linksArray.removeAt(linkIndex);
@@ -133,10 +158,21 @@ export class LinksComponent implements OnInit {
   }
 
   save() {
-    console.log(this.linksForm.value);
-    this.toastService.toastHandler(
-      'Your changes have been successfully saved!',
-      'save'
-    );
+    if (this.userDetails?.id) {
+      this.userService.updateUser(
+        this.userDetails.id,
+        this.linksForm.value as any
+      );
+      this.userService.user$.next({
+        ...this.userDetails,
+        ...(this.linksForm.value as any),
+      });
+      this.toastService.toastHandler(
+        'Your changes have been successfully saved!',
+        'save'
+      );
+    } else {
+      this.toastService.toastHandler('User is not logged in!', 'error');
+    }
   }
 }

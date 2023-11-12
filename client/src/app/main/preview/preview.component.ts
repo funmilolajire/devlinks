@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/shared/services/user.service';
 import { UserDetails } from 'src/app/shared/types/user';
 
 @Component({
@@ -6,21 +7,12 @@ import { UserDetails } from 'src/app/shared/types/user';
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.scss'],
 })
-export class PreviewComponent {
-  user: UserDetails = {
-    id: '1',
-    firstName: 'Ben',
-    lastName: 'Wright',
-    email: 'ben@example.com',
-    imageUrl:
-      'https://media.istockphoto.com/id/1157362474/photo/beautiful-woman-behind-leaves.jpg?s=612x612&w=0&k=20&c=E6hZbwKL4qpjUQciK1A6q8XF_7_e7rXcLdo1uXhYC-0=',
-    links: [
-      { platform: 'github', url: 'http://github' },
-      { platform: 'youtube', url: 'http://github' },
-      { platform: 'linkedin', url: 'http://github' },
-      // { platform: 'codepen', url: 'http://github' },
-      // { platform: 'codewars', url: 'http://github' },
-      // { platform: 'frontend_mentor', url: 'http://github' },
-    ],
-  };
+export class PreviewComponent implements OnInit {
+  user: UserDetails | null = null;
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.userService.user$.subscribe((user) => (this.user = user));
+  }
 }

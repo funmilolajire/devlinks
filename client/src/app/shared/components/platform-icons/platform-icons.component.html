@@ -1,42 +1,16 @@
 <app-codepen variant="small" class="logo icon" *ngIf="platform === 'codepen'" />
-<app-codewars
-  variant="small"
-  class="logo icon"
-  *ngIf="platform === 'codewars'"
-/>
-<app-dev-to variant="small" class="logo icon" *ngIf="platform === 'dev_to'" />
-<app-facebook
-  variant="small"
-  class="logo icon"
-  *ngIf="platform === 'facebook'"
-/>
-<app-freecodecamp
-  variant="small"
-  class="logo icon"
-  *ngIf="platform === 'freecodecamp'"
-/>
-<app-frontend-mentor
-  variant="small"
-  class="logo icon"
-  *ngIf="platform === 'frontend_mentor'"
-/>
+<app-codewars variant="small" class="logo icon" *ngIf="platform === 'codewars'" />
+<app-dev-to [inDropdown]="inDropdown" variant="small" class="logo icon"
+  *ngIf="platform === 'dev_to'" />
+<app-facebook variant="small" class="logo icon" *ngIf="platform === 'facebook'" />
+<app-freecodecamp variant="small" class="logo icon" *ngIf="platform === 'freecodecamp'" />
+<app-frontend-mentor [inDropdown]="inDropdown" variant="small" class="logo icon"
+  *ngIf="platform === 'frontend_mentor'" />
 <app-github variant="small" class="logo icon" *ngIf="platform === 'github'" />
 <app-gitlab variant="small" class="logo icon" *ngIf="platform === 'gitlab'" />
-<app-hashnode
-  variant="small"
-  class="logo icon"
-  *ngIf="platform === 'hashnode'"
-/>
-<app-linkedin
-  variant="small"
-  class="logo icon"
-  *ngIf="platform === 'linkedin'"
-/>
-<app-stack-overflow
-  variant="small"
-  class="logo icon"
-  *ngIf="platform === 'stack_overflow'"
-/>
+<app-hashnode variant="small" class="logo icon" *ngIf="platform === 'hashnode'" />
+<app-linkedin variant="small" class="logo icon" *ngIf="platform === 'linkedin'" />
+<app-stack-overflow variant="small" class="logo icon" *ngIf="platform === 'stack_overflow'" />
 <app-twitch variant="small" class="logo icon" *ngIf="platform === 'twitch'" />
 <app-twitter variant="small" class="logo icon" *ngIf="platform === 'twitter'" />
 <app-youtube variant="small" class="logo icon" *ngIf="platform === 'youtube'" />

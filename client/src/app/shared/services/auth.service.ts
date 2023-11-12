@@ -15,13 +15,12 @@ export class AuthService {
 
   login(email: string, password: string) {
     const user = this.userService.getUser(email);
-    console.log(password);
     if (password !== user.password) {
       this.toastService.toastHandler('Incorrect password', 'error');
       throw new Error('Password is incorrect');
     }
     this.lsService.setItem(this.storageKey, { email, password });
-    return this.getLoggedInUser(user.id);
+    return this.getLoggedInUser();
   }
 
   register(email: string, password: string) {
@@ -36,11 +35,12 @@ export class AuthService {
     return sessionUser;
   }
 
-  getLoggedInUser(id: string) {
-    if (this.checkSession(id)) {
+  getLoggedInUser() {
+    const auth = this.lsService.getItem(this.storageKey);
+    if (auth && this.checkSession(auth.email)) {
       return {
-        auth: this.checkSession(id),
-        user: this.userService.getUser(id),
+        auth: this.checkSession(auth.email),
+        user: this.userService.getUser(auth.email),
       };
     }
     throw new Error('No logged in user');

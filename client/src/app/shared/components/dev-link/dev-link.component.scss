@@ -10,12 +10,15 @@
   padding: 1.6rem;
   color: white;
   border-radius: 8px;
+
   &.small {
     height: 4.4rem;
     @extend %body-s;
   }
+
   .icon {
     display: flex;
+
     &.arrow {
       margin-left: auto;
     }
@@ -24,48 +27,62 @@
   &.github {
     background: #1a1a1a;
   }
+
   &.youtube {
     background: #ee3939;
   }
+
   &.linkedin {
     background: #2d68ff;
   }
+
   &.frontend_mentor {
     background: #fff;
     border: 1px solid $grey-borders;
     color: $grey-dark;
+
     .arrow {
       color: $grey;
     }
   }
+
   &.twitter {
     background: #43b7e9;
   }
+
   &.facebook {
     background: #2442ac;
   }
+
   &.twitch {
     background: #ee3fc8;
   }
+
   &.dev_to {
     background: #333;
   }
+
   &.codewars {
     background: #8a1a50;
   }
+
   &.codepen {
     background: #131417;
   }
+
   &.freecodecamp {
     background: #302267;
   }
+
   &.gitlab {
     background: #eb4925;
   }
+
   &.hashnode {
     background: #0330d1;
   }
-  .stack_overflow {
+
+  &.stack_overflow {
     background: #ec7100;
   }
 }

@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { UserDetails } from '../types/user';
 import { LocalStorageService } from './local-storage.service';
 import { ToastService } from '../components/toast/toast.service';
-
-const currentUser: UserDetails = {
-  id: '',
-  firstName: '',
-  lastName: '',
-  email: '',
-  imageUrl: '',
-  links: [],
-};
+import { v4 as uuid } from 'uuid';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   storageKey = 'user';
+  user$ = new BehaviorSubject<UserDetails | null>(null);
   constructor(
     private lsService: LocalStorageService,
     private toastService: ToastService
@@ -29,7 +23,6 @@ export class UserService {
     const user = this.getAllUsers().find(
       (user) => user.id === id || user.email === id
     ) as UserDetails & { password?: string };
-    console.log(user);
     if (user) {
       return user;
     }
@@ -67,13 +60,14 @@ export class UserService {
     const user = {} as UserDetails & { password: string };
     user.email = email;
     user.password = password;
+    user.id = uuid();
     const users = this.lsService.getItem(this.storageKey) || [];
     users.push(user);
     this.lsService.setItem(this.storageKey, users);
     return user;
   }
 
-  updateUser(id: string, details: UserDetails) {
+  updateUser(id: string, details: Partial<UserDetails>) {
     const users = this.lsService.getItem(this.storageKey) as (UserDetails & {
       password?: string;
     })[];
